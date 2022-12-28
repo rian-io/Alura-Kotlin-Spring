@@ -1,23 +1,14 @@
 package br.com.alura.forum.service
 
 import br.com.alura.forum.model.Course
+import br.com.alura.forum.repository.CourseRepository
 import org.springframework.stereotype.Service
 
 @Service
 class CourseService(
-    var courses: List<Course>
+    private val repository: CourseRepository
 ) {
-    init {
-        val course = Course(
-            id = 1,
-            name = "Kotlin",
-            category = "Programming"
-        )
-
-        courses = listOf(course)
-    }
-
     fun getById(id: Long): Course {
-        return courses.first { c -> c.id == id }
+        return repository.findById(id).get()
     }
 }
